@@ -13,17 +13,6 @@ export const HeaderContainer = styled.header`
   position: relative;
 `;
 
-export const HeaderLogo = styled.h1`
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 100%;
-  letter-spacing: 2px;
-`;
-
-export const HeaderLogoDot = styled.span`
-  color: ${({ theme }) => theme.secondary};
-`;
-
 export const HeaderNav = styled.nav`
   display: flex;
   flex-direction: row;
@@ -38,11 +27,17 @@ type HeaderLinkProps = {
 export const HeaderLink = styled.span<HeaderLinkProps>`
   margin: 0 12px;
   font-size: 16px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  color: #5a5b5c;
+
   ${({ active }) => active && `font-weight: 600 !important;`}
 
   &:hover {
     cursor: pointer;
     font-weight: 600;
+    color: ${({ theme }) => theme.text};
   }
 `;
 

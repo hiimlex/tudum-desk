@@ -3,13 +3,14 @@ import {
   HeaderButton,
   HeaderContainer,
   HeaderLink,
-  HeaderLogo,
-  HeaderLogoDot,
   HeaderMenu,
   HeaderNav,
 } from "./Header.styles";
 
-import { MdClose, MdMinimize } from "react-icons/md";
+import { MdClose, MdMinimize, MdOutlinePalette } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { showThemeModal } from "../../../core/store/slicers";
+import { HeaderLogo } from "../HeaderLogo";
 
 type NavLink = {
   pathname: string;
@@ -24,6 +25,11 @@ const Header = () => {
   ];
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleShowThemeModal = () => {
+    dispatch(showThemeModal());
+  };
 
   return (
     <HeaderContainer>
@@ -35,10 +41,7 @@ const Header = () => {
           <MdClose size={16}></MdClose>
         </HeaderButton>
       </HeaderMenu>
-      <HeaderLogo>
-        Tu<HeaderLogoDot>•</HeaderLogoDot>
-        <strong>dum</strong>
-      </HeaderLogo>
+      <HeaderLogo />
       <HeaderNav>
         {links &&
           links.map((link) => (
@@ -52,6 +55,9 @@ const Header = () => {
               {link.label}
             </HeaderLink>
           ))}
+        <HeaderLink active={false} onClick={handleShowThemeModal}>
+          <MdOutlinePalette size={18}></MdOutlinePalette>
+        </HeaderLink>
       </HeaderNav>
     </HeaderContainer>
   );

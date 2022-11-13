@@ -13,10 +13,7 @@ function createWindow() {
       nodeIntegration: true,
     },
     frame: false,
-    transparent: true,
   });
-
-  win.removeMenu();
 
   win.loadURL(
     isDev

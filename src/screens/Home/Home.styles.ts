@@ -12,8 +12,17 @@ export const HomeContainer = styled.div`
 
 export const HomeTitle = styled.h2`
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 1px;
+  color: #4a4b4c;
+  margin-bottom: 12px;
+`;
+
+export const HomeSubtitle = styled.h4`
+  font-size: 16px;
+  font-weight: 400;
+  color: #5a5b5c;
+  margin-bottom: 12px;
 `;
 
 export const HomeSection = styled.section`

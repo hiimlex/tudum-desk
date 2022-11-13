@@ -1,17 +1,12 @@
 import { createGlobalStyle, withTheme } from "styled-components";
-import { ThemeProps } from "./themes";
-
-export type GlobalThemeProps = {
-  theme: ThemeProps;
-};
 
 const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: ${(props: GlobalThemeProps) => props.theme.text};
-    background: ${(props: GlobalThemeProps) => props.theme.secondary + "66"};
+    color: ${(props) => props.theme.text};
+    background: ${(props) => props.theme.secondary + "66"};
     border-radius: 12px;
     overflow: hidden;
     width: 100vw;
