@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  height: 72px;
+  height: 82px;
   width: 100%;
   background: ${({ theme }) => theme.primary};
   display: flex;
-  padding: 12px 24px;
+  padding: 24px;
   align-items: flex-end;
   justify-content: space-between;
   color: ${({ theme }) => theme.text};
   -webkit-app-region: drag;
   position: relative;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
 `;
 
 export const HeaderNav = styled.nav`

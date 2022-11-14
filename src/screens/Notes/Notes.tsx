@@ -11,7 +11,7 @@ const Notes = () => {
   return (
     <NotesContainer>
       <NotesTitle>My notes</NotesTitle>
-      <NotesSubtitle>Here you can organize your notes ideas.</NotesSubtitle>
+      <NotesSubtitle>Share your notes.</NotesSubtitle>
       <NotesPanelSection>
         <NotesPanelTitle>Recent</NotesPanelTitle>
         <NotesPanelContent></NotesPanelContent>

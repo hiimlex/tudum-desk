@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { Home, Notes, Tasks } from "../../screens";
-import { Header, ThemeModal } from "../../ui";
+import { Header, ShareButton, ThemeModal } from "../../ui";
 
 type RouterBoundaryProps = {
   children: React.ReactNode;
@@ -13,6 +13,7 @@ const RouteBoundary = ({ children }: RouterBoundaryProps) => {
       <Header />
       {children}
       <ThemeModal />
+      <ShareButton />
     </React.Fragment>
   );
 };

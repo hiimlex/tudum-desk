@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     color: ${(props) => props.theme.text};
-    background: ${(props) => props.theme.secondary + "99"};
+    background: ${({ theme }) => theme.background + "66"};
     border-radius: 12px;
     overflow: hidden;
     width: 100vw;
