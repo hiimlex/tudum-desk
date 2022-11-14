@@ -11,6 +11,7 @@ import { MdClose, MdMinimize, MdOutlinePalette } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { showThemeModal } from "../../../core/store/slicers";
 import { HeaderLogo } from "../HeaderLogo";
+import { IpcService } from "../../../core";
 
 type NavLink = {
   pathname: string;
@@ -23,6 +24,7 @@ const Header = () => {
     { pathname: "/notes", label: "Notes" },
     { pathname: "/tasks", label: "Tasks" },
   ];
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,13 +33,21 @@ const Header = () => {
     dispatch(showThemeModal());
   };
 
+  const handleCloseApp = () => {
+    IpcService.send("closeMain");
+  };
+
+  const handleMinimizeApp = () => {
+    IpcService.send("minimizeMain");
+  };
+
   return (
     <HeaderContainer>
       <HeaderMenu>
         <HeaderButton>
-          <MdMinimize size={16}></MdMinimize>
+          <MdMinimize size={16} onClick={handleMinimizeApp}></MdMinimize>
         </HeaderButton>
-        <HeaderButton>
+        <HeaderButton onClick={handleCloseApp}>
           <MdClose size={16}></MdClose>
         </HeaderButton>
       </HeaderMenu>

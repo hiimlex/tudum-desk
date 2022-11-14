@@ -28,11 +28,19 @@ const notesSlice = createSlice<
     removeNoteById: (state, action: GenericAction<string>) => {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
+    editNoteById: (
+      state,
+      action: GenericAction<{ id: string; note: Note }>
+    ) => {
+      state.notes = state.notes.map((note) =>
+        note.id === action.payload.id ? action.payload.note : note
+      );
+    },
   },
 });
 
 const setNotes: ActionCreatorWithPayload<Note[]> = notesSlice.actions
-  .setCategories as any;
+  .setNotes as any;
 
 const addNote: ActionCreatorWithPayload<Note> = notesSlice.actions
   .addNote as any;
@@ -40,6 +48,9 @@ const addNote: ActionCreatorWithPayload<Note> = notesSlice.actions
 const removeNoteById: ActionCreatorWithPayload<string> = notesSlice.actions
   .removeNoteById as any;
 
+const editNoteById: ActionCreatorWithPayload<{ id: string; note: Note }> =
+  notesSlice.actions.editNoteById as any;
+
 const notesReducer = notesSlice.reducer;
 
-export { notesReducer, setNotes, removeNoteById, addNote };
+export { notesReducer, setNotes, removeNoteById, addNote, editNoteById };

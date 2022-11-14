@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../core";
 import {
+  ColorsType,
   hideThemeModal,
   setPrimaryColor,
   setSecondaryColor,
 } from "../../../core/store/slicers";
-import { ColorsType } from "../../styles";
 import { Modal } from "../Modal";
 import {
   ThemeButton,
@@ -23,18 +23,23 @@ type SwitcherModes = "primary" | "secondary";
 const ThemeModal = () => {
   const dispatch = useDispatch();
   const showModal = useSelector((state: RootState) => state.themeModal.show);
-
+  const theme = useSelector((state: RootState) => state.theme.theme);
+  const [colorsAsArray, setColorsAsArray] = useState<
+    { key: ColorsType; value: string }[]
+  >([]);
   const [showThemeSwitcher, setShowThemeSwitcher] = useState(false);
   const [themeSwitcherMode, setThemeSwitcherMode] = useState<SwitcherModes>();
 
-  const theme = useSelector((state: RootState) => state.theme.theme);
+  useEffect(() => {
+    if (theme.colors) {
+      const mappedColors = Object.keys(theme.colors).map((key) => ({
+        key: key as ColorsType,
+        value: theme.colors[key as keyof typeof theme.colors],
+      }));
 
-  const colorsAsArray: { key: ColorsType; value: string }[] = Object.keys(
-    theme.colors
-  ).map((key) => ({
-    key: key as ColorsType,
-    value: theme.colors[key as keyof typeof theme.colors],
-  }));
+      setColorsAsArray(mappedColors);
+    }
+  }, [theme]);
 
   const handleCloseThemeModal = () => {
     setShowThemeSwitcher(false);
