@@ -1,46 +1,12 @@
-import styled, { css, DefaultTheme, keyframes } from "styled-components";
+import styled, { DefaultTheme, keyframes } from "styled-components";
 
-export const ShareButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.primary};
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-`;
-
-export const ActionButtonContainer = styled.div<{
-  bottom: number;
-  right: number;
-  color: keyof DefaultTheme;
-}>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  position: absolute;
-  bottom: ${({ bottom }) => bottom + "px"};
-  right: ${({ right }) => right + "px"};
-  background-color: ${({ theme, color }) => theme[color]};
-  box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.text};
-
-  animation: ${({ right, bottom }) =>
-      right > bottom ? animateToLeft : animateToTop}
-    0.2s ease-in-out forwards;
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 `;
 
 const animateToLeft = keyframes`
@@ -49,7 +15,7 @@ const animateToLeft = keyframes`
       bottom: 24px;
     }
     to {
-      right: 84px;
+      right: 104px;
       bottom: 24px;
     }
 `;
@@ -61,6 +27,64 @@ const animateToTop = keyframes`
     }
     to {
       right: 24px;
-      bottom: 84px;
+      bottom: 104px;
     }
+`;
+
+export const ShareButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.primary};
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  color: ${({ theme }) => theme.text};
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+export const ActionButtonContainer = styled.div<{
+  bottom: number;
+  right: number;
+  color: keyof DefaultTheme;
+}>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: ${({ bottom }) => bottom + "px"};
+  right: ${({ right }) => right + "px"};
+  background-color: ${({ theme, color }) => theme[color]};
+  box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  color: ${({ theme }) => theme.text};
+
+  animation: ${({ right, bottom }) =>
+      right > bottom ? animateToLeft : animateToTop}
+    0.2s ease-in-out forwards;
+
+  &.hide-animation {
+    animation: ${fadeOut} 0.2s ease-in-out forwards;
+  }
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;

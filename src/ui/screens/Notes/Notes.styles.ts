@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NotesContainer = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -30,6 +30,8 @@ export const NotesPanelSection = styled.div`
   background: white;
   border-radius: 12px;
   display: flex;
+  flex-direction: column;
+
   margin: 12px 0;
 `;
 export const NotesPanelTitle = styled.span`
@@ -38,6 +40,34 @@ export const NotesPanelTitle = styled.span`
 `;
 export const NotesPanelContent = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
+  margin-top: 12px;
+
+  .tudum-note {
+    margin-right: 18px;
+    margin-bottom: 18px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .tudum-note {
+      margin-bottom: 18px;
+      margin-right: 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 `;

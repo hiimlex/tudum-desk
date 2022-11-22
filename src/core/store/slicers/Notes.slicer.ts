@@ -16,7 +16,24 @@ const notesSlice = createSlice<
 >({
   name: "notes",
   initialState: {
-    notes: [],
+    notes: [
+      {
+        id: "1",
+        color: "red",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        title: "My first",
+        createdAt: "2021-01-01 12:00:00",
+        favorite: false,
+      },
+      {
+        id: "2",
+        color: "purple",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        title: "My second",
+        createdAt: "2021-01-01 12:00:00",
+        favorite: true,
+      },
+    ],
   },
   reducers: {
     setNotes: (state, action: GenericAction<Note[]>) => {
@@ -36,6 +53,13 @@ const notesSlice = createSlice<
         note.id === action.payload.id ? action.payload.note : note
       );
     },
+    favoriteById: (state, action: GenericAction<string>) => {
+      state.notes = state.notes.map((note) =>
+        note.id === action.payload
+          ? { ...note, favorite: !note.favorite }
+          : note
+      );
+    },
   },
 });
 
@@ -51,6 +75,16 @@ const removeNoteById: ActionCreatorWithPayload<string> = notesSlice.actions
 const editNoteById: ActionCreatorWithPayload<{ id: string; note: Note }> =
   notesSlice.actions.editNoteById as any;
 
+const favoriteById: ActionCreatorWithPayload<string> = notesSlice.actions
+  .favoriteById as any;
+
 const notesReducer = notesSlice.reducer;
 
-export { notesReducer, setNotes, removeNoteById, addNote, editNoteById };
+export {
+  notesReducer,
+  setNotes,
+  removeNoteById,
+  addNote,
+  editNoteById,
+  favoriteById,
+};

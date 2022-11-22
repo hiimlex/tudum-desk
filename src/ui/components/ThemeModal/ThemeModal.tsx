@@ -65,8 +65,9 @@ const ThemeModal = () => {
 
   return (
     <React.Fragment>
-      {showModal && (
+      {/* {showModal && (
         <Modal
+          id="theme-modal"
           title="Theme configuration"
           onClose={handleCloseThemeModal}
           show={showModal}
@@ -107,7 +108,7 @@ const ThemeModal = () => {
             )}
           </ThemeModalContainer>
         </Modal>
-      )}
+      )} */}
     </React.Fragment>
   );
 };

@@ -3,3 +3,4 @@ export * from "./HeaderLogo";
 export * from "./ThemeModal";
 export * from "./Modal";
 export * from "./ShareButton";
+export * from "./Note";

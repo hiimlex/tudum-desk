@@ -27,7 +27,7 @@ function createWindow() {
   );
 
   if (isDev) {
-    win.webContents.openDevTools();
+    win.webContents.openDevTools({ mode: "detach" });
   }
 
   ipc.on("closeMain", () => {

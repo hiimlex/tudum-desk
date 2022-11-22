@@ -3,6 +3,7 @@ import store from "../../store";
 import {
   addNote,
   editNoteById,
+  favoriteById,
   removeNoteById,
   setNotes,
 } from "../../store/slicers";
@@ -22,6 +23,10 @@ class NotesService {
 
   editNoteById(id: string, note: Note): void {
     store.dispatch(editNoteById({ id, note }));
+  }
+
+  favoriteById(id: string): void {
+    store.dispatch(favoriteById(id));
   }
 }
 
