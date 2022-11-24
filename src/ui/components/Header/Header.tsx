@@ -4,14 +4,12 @@ import {
   HeaderContainer,
   HeaderLink,
   HeaderMenu,
-  HeaderNav,
+  HeaderNav
 } from "./Header.styles";
 
 import { MdClose, MdMinimize, MdOutlinePalette } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { showThemeModal } from "../../../core/store/slicers";
-import { HeaderLogo } from "../HeaderLogo";
 import { IpcService } from "../../../core";
+import { HeaderLogo } from "../HeaderLogo";
 
 type NavLink = {
   pathname: string;
@@ -27,11 +25,8 @@ const Header = () => {
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const handleShowThemeModal = () => {
-    dispatch(showThemeModal());
-  };
+  const handleShowThemeModal = () => {};
 
   const handleCloseApp = () => {
     IpcService.send("closeMain");
@@ -74,3 +69,4 @@ const Header = () => {
 };
 
 export { Header };
+

@@ -1,7 +1,7 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Header, ShareButton } from "../../ui";
-import { Home, Notes, Tasks } from "../../ui/screens";
+import { Home, Login, Notes, Tasks } from "../../ui/screens";
 import ModalContext from "../providers/ModalContext";
 
 type RouterBoundaryProps = {
@@ -9,6 +9,12 @@ type RouterBoundaryProps = {
 };
 
 const RouteBoundary = ({ children }: RouterBoundaryProps) => {
+  const token = window.localStorage.getItem("auth-token");
+
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <React.Fragment>
       <Header />
@@ -31,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/tasks",
     element: <RouteBoundary children={<Tasks />} />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

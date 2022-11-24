@@ -1,11 +1,5 @@
-import {
-  ActionCreatorWithoutPayload,
-  ActionCreatorWithPayload,
-  createSlice,
-  SliceCaseReducers,
-} from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import { DefaultTheme } from "styled-components";
-import { GenericAction } from "..";
 
 export type ColorsType =
   | "red"
@@ -54,34 +48,9 @@ const themeSlice = createSlice<ThemeState, SliceCaseReducers<ThemeState>>({
   initialState: {
     theme: defaultTheme,
   },
-  reducers: {
-    getPersistedTheme: (state) => {
-      const theme = localStorage.getItem("theme");
-
-      if (theme) {
-        state.theme = JSON.parse(theme);
-      } else {
-        localStorage.setItem("theme", JSON.stringify(defaultTheme));
-      }
-    },
-    setPrimaryColor: (state, action: GenericAction<string>) => {
-      state.theme.primary = action.payload;
-    },
-    setSecondaryColor: (state, action: GenericAction<string>) => {
-      state.theme.secondary = action.payload;
-    },
-  },
+  reducers: {},
 });
-
-const setPrimaryColor: ActionCreatorWithPayload<string> = themeSlice.actions
-  .setPrimaryColor as any;
-
-const setSecondaryColor: ActionCreatorWithPayload<string> = themeSlice.actions
-  .setSecondaryColor as any;
-
-const getPersistedTheme: ActionCreatorWithoutPayload = themeSlice.actions
-  .getPersistedTheme as any;
 
 const themeReducer = themeSlice.reducer;
 
-export { themeReducer, setPrimaryColor, setSecondaryColor, getPersistedTheme };
+export { themeReducer };

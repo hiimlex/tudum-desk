@@ -1,7 +1,7 @@
 import { ColorsType } from "../store/slicers";
 
 export interface Note {
-  id: string;
+  _id: string;
   title: string;
   content: string;
   color: ColorsType;

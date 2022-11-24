@@ -7,10 +7,9 @@ import {
   NoteTitle,
 } from "./Note.styles";
 
-import { MdFavorite, MdOutlineFavoriteBorder, MdDelete } from "react-icons/md";
+import { MdDelete, MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { NotesService, RootState } from "../../../core";
-import { useState } from "react";
 
 interface NoteProps {
   id: string;

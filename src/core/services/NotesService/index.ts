@@ -1,33 +1,16 @@
 import { Note } from "../../models";
-import store from "../../store";
-import {
-  addNote,
-  editNoteById,
-  favoriteById,
-  removeNoteById,
-  setNotes,
-} from "../../store/slicers";
+import {} from "../../store/slicers";
 
 class NotesService {
-  setNotes(notes: Note[]): void {
-    store.dispatch(setNotes(notes));
-  }
+  setNotes(notes: Note[]): void {}
 
-  addNote(note: Note): void {
-    store.dispatch(addNote(note));
-  }
+  addNote(note: Note): void {}
 
-  removeNoteById(id: string): void {
-    store.dispatch(removeNoteById(id));
-  }
+  removeNoteById(id: string): void {}
 
-  editNoteById(id: string, note: Note): void {
-    store.dispatch(editNoteById({ id, note }));
-  }
+  editNoteById(id: string, note: Note): void {}
 
-  favoriteById(id: string): void {
-    store.dispatch(favoriteById(id));
-  }
+  favoriteById(id: string): void {}
 }
 
 export default new NotesService();

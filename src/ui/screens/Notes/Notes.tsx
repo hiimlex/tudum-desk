@@ -19,34 +19,16 @@ const Notes = () => {
       <NotesSubtitle>Share your notes.</NotesSubtitle>
       <NotesPanelSection>
         <NotesPanelTitle>Favorites</NotesPanelTitle>
-        <NotesPanelContent>
-          {notes
-            .filter((note) => note.favorite)
-            .map((note) => (
-              <Note
-                key={note.id}
-                color={note.color}
-                content={note.content}
-                id={note.id}
-                title={note.title}
-                createdAt={note.createdAt}
-                updatedAt={note.updatedAt}
-                favorite={note.favorite}
-              />
-            ))}
-        </NotesPanelContent>
-      </NotesPanelSection>
-      <NotesPanelSection>
-        <NotesPanelTitle>All</NotesPanelTitle>
-        {notes.length > 0 ? (
+        {notes.filter((note) => note.favorite).length > 0 ? (
           <NotesPanelContent>
-            {notes &&
-              notes.map((note) => (
+            {notes
+              .filter((note) => note.favorite)
+              .map((note) => (
                 <Note
-                  key={note.id}
+                  key={note._id}
                   color={note.color}
                   content={note.content}
-                  id={note.id}
+                  id={note._id}
                   title={note.title}
                   createdAt={note.createdAt}
                   updatedAt={note.updatedAt}
@@ -55,7 +37,29 @@ const Notes = () => {
               ))}
           </NotesPanelContent>
         ) : (
-          <div>No notes</div>
+          <span>No favorite notes</span>
+        )}
+      </NotesPanelSection>
+      <NotesPanelSection>
+        <NotesPanelTitle>All</NotesPanelTitle>
+        {notes.length > 0 ? (
+          <NotesPanelContent>
+            {notes &&
+              notes.map((note) => (
+                <Note
+                  key={note._id}
+                  color={note.color}
+                  content={note.content}
+                  id={note._id}
+                  title={note.title}
+                  createdAt={note.createdAt}
+                  updatedAt={note.updatedAt}
+                  favorite={note.favorite}
+                />
+              ))}
+          </NotesPanelContent>
+        ) : (
+          <span>No notes</span>
         )}
       </NotesPanelSection>
     </NotesContainer>

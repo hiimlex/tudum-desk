@@ -43,6 +43,7 @@ const Modal = ({
     if (shouldDestroyOnClose) {
       ModalService.removeModalById(id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onClose]);
 
   return (
