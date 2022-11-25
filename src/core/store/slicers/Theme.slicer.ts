@@ -1,5 +1,10 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  ActionCreatorWithPayload,
+  createSlice,
+  SliceCaseReducers,
+} from "@reduxjs/toolkit";
 import { DefaultTheme } from "styled-components";
+import { GenericAction } from "..";
 
 export type ColorsType =
   | "red"
@@ -48,9 +53,27 @@ const themeSlice = createSlice<ThemeState, SliceCaseReducers<ThemeState>>({
   initialState: {
     theme: defaultTheme,
   },
-  reducers: {},
+  reducers: {
+    setTheme: (
+      state,
+      action: GenericAction<{ primary?: string; secondary?: string }>
+    ) => {
+      if (action.payload.primary) {
+        state.theme.primary = action.payload.primary;
+      }
+
+      if (action.payload.secondary) {
+        state.theme.secondary = action.payload.secondary;
+      }
+    },
+  },
 });
+
+const setTheme: ActionCreatorWithPayload<{
+  primary: string;
+  secondary: string;
+}> = themeSlice.actions.setTheme as any;
 
 const themeReducer = themeSlice.reducer;
 
-export { themeReducer };
+export { themeReducer, setTheme };

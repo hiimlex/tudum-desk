@@ -7,16 +7,18 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     color: ${(props) => props.theme.text};
     background: ${({ theme }) => theme.background + "66"};
-    border-radius: 12px;
-    overflow: hidden;
     width: 100vw;
-    height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   * {
     margin: 0;
     box-sizing: border-box;
     outline: none;
+    -webkit-app-region: no-drag;
+    font-family: 'Poppins', sans-serif;
   }
 
   span.ripple {
@@ -33,6 +35,28 @@ const GlobalStyles = createGlobalStyle`
       opacity: 0;
     }
   }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: ${({ theme }) => theme.primary}; 
+
+  transition: all 0.1s ease-in-out;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: ${({ theme }) => theme.secondary}; 
+}
 `;
 
 export default withTheme(GlobalStyles);

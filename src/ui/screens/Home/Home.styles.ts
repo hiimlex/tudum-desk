@@ -12,7 +12,7 @@ export const HomeContainer = styled.div`
 
 export const HomeTitle = styled.h2`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 1px;
   color: #4a4b4c;
   margin-bottom: 12px;

@@ -50,7 +50,7 @@ export const ShareButtonContainer = styled.div`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    opacity: 0.9;
+    transform: scale(1.05);
   }
 `;
 
@@ -85,6 +85,6 @@ export const ActionButtonContainer = styled.div<{
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    opacity: 0.9;
+    transform: scale(1.05);
   }
 `;

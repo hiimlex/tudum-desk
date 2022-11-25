@@ -1,14 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  HeaderButton,
-  HeaderContainer,
-  HeaderLink,
-  HeaderMenu,
-  HeaderNav
-} from "./Header.styles";
+import { HeaderContainer, HeaderLink, HeaderNav } from "./Header.styles";
 
-import { MdClose, MdMinimize, MdOutlinePalette } from "react-icons/md";
-import { IpcService } from "../../../core";
+import { AuthService } from "../../../core";
+import { AppBar } from "../AppBar";
 import { HeaderLogo } from "../HeaderLogo";
 
 type NavLink = {
@@ -18,34 +12,22 @@ type NavLink = {
 
 const Header = () => {
   const links: NavLink[] = [
-    { pathname: "/", label: "Me" },
-    { pathname: "/notes", label: "Notes" },
+    { pathname: "/", label: "Notes" },
     { pathname: "/tasks", label: "Tasks" },
+    { pathname: "/profile", label: "User" },
   ];
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const handleShowThemeModal = () => {};
-
-  const handleCloseApp = () => {
-    IpcService.send("closeMain");
-  };
-
-  const handleMinimizeApp = () => {
-    IpcService.send("minimizeMain");
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate("/login");
   };
 
   return (
     <HeaderContainer>
-      <HeaderMenu>
-        <HeaderButton>
-          <MdMinimize size={16} onClick={handleMinimizeApp}></MdMinimize>
-        </HeaderButton>
-        <HeaderButton onClick={handleCloseApp}>
-          <MdClose size={16}></MdClose>
-        </HeaderButton>
-      </HeaderMenu>
+      <AppBar />
       <HeaderLogo />
       <HeaderNav>
         {links &&
@@ -60,8 +42,8 @@ const Header = () => {
               {link.label}
             </HeaderLink>
           ))}
-        <HeaderLink active={false} onClick={handleShowThemeModal}>
-          <MdOutlinePalette size={18}></MdOutlinePalette>
+        <HeaderLink active={false} onClick={handleLogout}>
+          Logout
         </HeaderLink>
       </HeaderNav>
     </HeaderContainer>
@@ -69,4 +51,3 @@ const Header = () => {
 };
 
 export { Header };
-

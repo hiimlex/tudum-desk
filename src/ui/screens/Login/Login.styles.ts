@@ -5,10 +5,8 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-
   color: ${({ theme }) => theme.text};
 `;
 
@@ -17,6 +15,8 @@ export const LoginContent = styled.main`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+
+  width: 244px;
 `;
 
 export const LoginLogo = styled.div`
@@ -33,11 +33,7 @@ export const LoginHeader = styled.header`
   flex-direction: column;
   text-align: left;
   margin-top: 12px;
-`;
-
-export const LoginTitle = styled.h2`
-  font-weight: 500;
-  font-size: 18px;
+  text-align: center;
 `;
 
 export const LoginSubtitle = styled.h4`
@@ -57,10 +53,10 @@ export const LoginInput = styled.input`
   width: 100%;
   margin-bottom: 8px;
   height: 42px;
-  font-family: "Poppins", sans-serif;
   border-radius: 4px;
   border: 1px solid #e0e0e0;
   padding: 8px 12px;
+  font-size: 14px;
 `;
 
 export const LoginButton = styled.button`
@@ -70,14 +66,15 @@ export const LoginButton = styled.button`
   border: none;
   background: ${({ theme }) => theme.secondary};
   font-size: 14px;
-  font-weight: 700;
-  font-family: "Poppins", sans-serif;
-  color: ${({ theme }) => theme.text};
+  font-weight: 600;
+  color: ${({ theme }) => theme.textLighter};
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  margin: 12px 0;
+  text-transform: uppercase;
 
   &:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
   }
 
   &.disabled {
@@ -87,5 +84,26 @@ export const LoginButton = styled.button`
     &:hover {
       transform: scale(1);
     }
+  }
+`;
+
+export const LoginFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const LoginFooterLink = styled.span`
+  margin-top: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    font-weight: 600;
   }
 `;

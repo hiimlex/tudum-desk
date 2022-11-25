@@ -9,7 +9,6 @@ export const HeaderContainer = styled.header`
   align-items: flex-end;
   justify-content: space-between;
   color: ${({ theme }) => theme.text};
-  -webkit-app-region: drag;
   position: relative;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
@@ -19,7 +18,6 @@ export const HeaderNav = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  -webkit-app-region: no-drag !important;
 `;
 
 type HeaderLinkProps = {
@@ -40,27 +38,5 @@ export const HeaderLink = styled.span<HeaderLinkProps>`
     cursor: pointer;
     font-weight: 600;
     color: ${({ theme }) => theme.text};
-  }
-`;
-
-export const HeaderMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  position: absolute;
-  z-index: 99;
-  top: 0;
-  right: 0;
-  -webkit-app-region: no-drag;
-`;
-export const HeaderButton = styled.span`
-  display: flex;
-  align-items: flex-start;
-  transition: all 0.2s ease-in-out;
-  padding: 2px 8px;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.1);
   }
 `;

@@ -1,20 +1,52 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Header, ShareButton } from "../../ui";
-import { Home, Login, Notes, Tasks } from "../../ui/screens";
+import {
+  Header,
+  Home,
+  Login,
+  Notes,
+  Register,
+  ShareButton,
+  Tasks,
+} from "../../ui";
+
 import ModalContext from "../providers/ModalContext";
+import { setUser } from "../store/slicers";
 
 type RouterBoundaryProps = {
   children: React.ReactNode;
 };
 
-const RouteBoundary = ({ children }: RouterBoundaryProps) => {
-  const token = window.localStorage.getItem("auth-token");
+type PrivateRouteProps = {
+  children: React.ReactNode;
+};
 
-  if (!token) {
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
+  const token = window.localStorage.getItem("auth-token");
+  const user = window.localStorage.getItem("user");
+  const dispatch = useDispatch();
+
+  const handlePersistUserData = useCallback(async () => {
+    if (user) {
+      dispatch(setUser(JSON.parse(user)));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    handlePersistUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!token || !user || (!!user && Object.keys(user).length === 0)) {
     return <Navigate to="/login" />;
   }
 
+  return <RouteBoundary>{children}</RouteBoundary>;
+};
+
+const RouteBoundary = ({ children }: RouterBoundaryProps) => {
   return (
     <React.Fragment>
       <Header />
@@ -28,19 +60,23 @@ const RouteBoundary = ({ children }: RouterBoundaryProps) => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RouteBoundary children={<Home />} />,
-  },
-  {
-    path: "/notes",
-    element: <RouteBoundary children={<Notes />} />,
+    element: <PrivateRoute children={<Notes />} />,
   },
   {
     path: "/tasks",
-    element: <RouteBoundary children={<Tasks />} />,
+    element: <PrivateRoute children={<Tasks />} />,
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" />,
   },
 ]);
 

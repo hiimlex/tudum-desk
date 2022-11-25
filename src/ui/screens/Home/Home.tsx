@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../../core";
 import {
   HomeContainer,
   HomeSection,
@@ -8,12 +10,13 @@ import {
 } from "./Home.styles";
 
 const Home = () => {
+  const user = useSelector((state: RootState) => state.user.user);
+
   return (
     <HomeContainer>
-      <HomeTitle>My Space</HomeTitle>
+      <HomeTitle>Welcome {user && user.name}</HomeTitle>
       <HomeSubtitle>
-        Welcome to the Tu•<strong>dum</strong> app, here you can organize your
-        ideas easily.
+        See your recent's notes and tasks, and create new ones.
       </HomeSubtitle>
       <HomeSection>
         <HomeSectionTitle>Pinned</HomeSectionTitle>

@@ -18,6 +18,7 @@ function createWindow() {
       preload: path.join(app.getAppPath(), "public/pre-load.js"),
     },
     frame: false,
+    icon: "logo.ico",
   });
 
   win.loadURL(

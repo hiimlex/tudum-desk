@@ -1,6 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { notesReducer, themeReducer } from "./slicers";
-import { modalReducer } from "./slicers/Modal.slicer";
+import {
+  notesReducer,
+  themeReducer,
+  userReducer,
+  modalReducer,
+} from "./slicers";
 
 export interface GenericAction<T = any> {
   type: string;
@@ -11,6 +15,7 @@ const rootReducer = combineReducers({
   notes: notesReducer,
   theme: themeReducer,
   modal: modalReducer,
+  user: userReducer,
 });
 
 const store = configureStore({
