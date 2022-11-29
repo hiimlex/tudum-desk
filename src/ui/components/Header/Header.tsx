@@ -1,9 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { HeaderContainer, HeaderLink, HeaderNav } from "./Header.styles";
 
-import { AuthService } from "../../../core";
+import { AuthService, useModal } from "../../../core";
 import { AppBar } from "../AppBar";
 import { HeaderLogo } from "../HeaderLogo";
+
+import { MdLogout, MdOutlinePalette } from "react-icons/md";
+import { ThemeModal } from "../ThemeModal";
 
 type NavLink = {
   pathname: string;
@@ -12,9 +15,9 @@ type NavLink = {
 
 const Header = () => {
   const links: NavLink[] = [
-    { pathname: "/", label: "Notes" },
-    { pathname: "/tasks", label: "Tasks" },
-    { pathname: "/profile", label: "User" },
+    { pathname: "/", label: "notes" },
+    { pathname: "/tasks", label: "tasks" },
+    { pathname: "/profile", label: "user" },
   ];
 
   const { pathname } = useLocation();
@@ -23,6 +26,21 @@ const Header = () => {
   const handleLogout = () => {
     AuthService.logout();
     navigate("/login");
+  };
+
+  const modalService = useModal();
+
+  const handleCreateThemeModal = () => {
+    modalService.create({
+      children: <ThemeModal />,
+      id: "theme-modal",
+      title: "theme settings",
+      onClose: () => null,
+      shouldDestroyOnClose: true,
+      show: true,
+      width: "45%",
+      zIndex: 1,
+    });
   };
 
   return (
@@ -42,8 +60,11 @@ const Header = () => {
               {link.label}
             </HeaderLink>
           ))}
+        <HeaderLink active={false} onClick={handleCreateThemeModal}>
+          <MdOutlinePalette size={18}></MdOutlinePalette>
+        </HeaderLink>
         <HeaderLink active={false} onClick={handleLogout}>
-          Logout
+          <MdLogout size={18}></MdLogout>
         </HeaderLink>
       </HeaderNav>
     </HeaderContainer>

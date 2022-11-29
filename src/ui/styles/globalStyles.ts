@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     color: ${(props) => props.theme.text};
-    background: ${({ theme }) => theme.background + "66"};
+    background: ${({ theme }) => theme.backgroundContrast + "88"};
     width: 100vw;
     max-height: 100vh;
     overflow-x: hidden;
@@ -17,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
     outline: none;
-    -webkit-app-region: no-drag;
     font-family: 'Poppins', sans-serif;
   }
 

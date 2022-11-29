@@ -12,17 +12,21 @@ export const NotesContainer = styled.div`
 
 export const NotesTitle = styled.h2`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 1px;
-  color: #4a4b4c;
   margin-bottom: 12px;
+  color: ${({ theme }) => theme.textLighter};
+  text-align: center;
+
+  .dot {
+    color: ${({ theme }) => theme.secondary};
+  }
 `;
 
 export const NotesSubtitle = styled.h4`
   font-size: 16px;
   font-weight: 400;
-  color: #5a5b5c;
-  margin-bottom: 12px;
+  text-align: center;
 `;
 
 export const NotesPanelSection = styled.div`
@@ -38,6 +42,7 @@ export const NotesPanelTitle = styled.span`
   font-size: 18px;
   font-weight: 500;
 `;
+
 export const NotesPanelContent = styled.div`
   display: flex;
   flex-direction: row;

@@ -10,6 +10,7 @@ import {
   ShareButton,
   Tasks,
 } from "../../ui";
+import { Profile } from "../../ui/screens/Profile";
 
 import ModalContext from "../providers/ModalContext";
 import { setUser } from "../store/slicers";
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: "/tasks",
     element: <PrivateRoute children={<Tasks />} />,
+  },
+  {
+    path: "/profile",
+    element: <PrivateRoute children={<Profile />} />,
   },
   {
     path: "/login",

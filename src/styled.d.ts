@@ -5,6 +5,7 @@ import { ColorsType } from "./ui";
 declare module "styled-components" {
   export interface DefaultTheme {
     background: string;
+    backgroundContrast: string;
     text: string;
     textLighter: string;
     primary: string;

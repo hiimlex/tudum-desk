@@ -1,4 +1,9 @@
-import { AppButton, AppMenu, AppMenuButtons, DraggableArea } from "./AppBar.styles";
+import {
+  AppButton,
+  AppMenu,
+  AppMenuButtons,
+  DraggableArea,
+} from "./AppBar.styles";
 
 import { MdClose, MdMinimize } from "react-icons/md";
 

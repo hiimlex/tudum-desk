@@ -10,6 +10,7 @@ export const AppMenu = styled.div`
   top: 0;
   right: 0;
   width: 100%;
+  -webkit-app-region: no-drag;
 `;
 
 export const DraggableArea = styled.div`

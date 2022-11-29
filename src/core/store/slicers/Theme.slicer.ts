@@ -36,8 +36,9 @@ export const colors: Record<ColorsType, string> = {
 export type ThemeProps = DefaultTheme;
 
 export const defaultTheme: ThemeProps = {
-  background: "#efefef",
-  text: "#3a3b3c",
+  background: "#ffffff",
+  backgroundContrast: "#efefef",
+  text: "#4a4b4c",
   textLighter: "#6a6b6c",
   primary: colors.yellow,
   secondary: colors.orange,

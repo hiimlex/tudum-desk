@@ -4,12 +4,11 @@ import {
   ModalContainer,
   ModalHeader,
   ModalTitle,
-  ModalWrapper,
 } from "./Modal.styles";
 
 import { useEffect } from "react";
 import { MdClose } from "react-icons/md";
-import { ModalService } from "../../../core";
+import { useModal } from "../../../core";
 
 export interface ModalProps {
   id: string;
@@ -30,7 +29,10 @@ const Modal = ({
   show,
   width = 460,
   shouldDestroyOnClose,
+  zIndex,
 }: ModalProps) => {
+  const modalService = useModal();
+
   useEffect(() => {
     document.addEventListener("keydown", (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -39,27 +41,30 @@ const Modal = ({
     });
   });
 
-  useEffect(() => {
+  const handleOnClose = () => {
+    modalService.hide(id);
+
     if (shouldDestroyOnClose) {
-      ModalService.removeModalById(id);
+      modalService.destroy(id);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onClose]);
+
+    onClose();
+  };
 
   return (
-    <ModalWrapper>
+    <>
       {show && (
-        <ModalContainer style={{ width }}>
+        <ModalContainer style={{ width, zIndex }}>
           <ModalHeader>
             <ModalTitle>{title}</ModalTitle>
             <ModalClose>
-              <MdClose onClick={onClose} />
+              <MdClose onClick={handleOnClose} />
             </ModalClose>
           </ModalHeader>
           <ModalBody>{children}</ModalBody>
         </ModalContainer>
       )}
-    </ModalWrapper>
+    </>
   );
 };
 

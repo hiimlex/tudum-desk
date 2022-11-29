@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import {
   notesReducer,
   themeReducer,
@@ -20,6 +21,10 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

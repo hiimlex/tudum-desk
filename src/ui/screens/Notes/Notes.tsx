@@ -15,10 +15,13 @@ const Notes = () => {
 
   return (
     <NotesContainer>
-      <NotesTitle>My notes</NotesTitle>
-      <NotesSubtitle>Share your notes.</NotesSubtitle>
+      <NotesTitle>
+        my<span className="dot">•</span>
+        <strong>notes</strong>
+      </NotesTitle>
+      <NotesSubtitle>share your notes</NotesSubtitle>
       <NotesPanelSection>
-        <NotesPanelTitle>Favorites</NotesPanelTitle>
+        <NotesPanelTitle>favorites</NotesPanelTitle>
         {notes.filter((note) => note.favorite).length > 0 ? (
           <NotesPanelContent>
             {notes
@@ -37,11 +40,11 @@ const Notes = () => {
               ))}
           </NotesPanelContent>
         ) : (
-          <span>No favorite notes</span>
+          <span>no favorite notes</span>
         )}
       </NotesPanelSection>
       <NotesPanelSection>
-        <NotesPanelTitle>All</NotesPanelTitle>
+        <NotesPanelTitle>all</NotesPanelTitle>
         {notes.length > 0 ? (
           <NotesPanelContent>
             {notes &&
@@ -59,7 +62,7 @@ const Notes = () => {
               ))}
           </NotesPanelContent>
         ) : (
-          <span>No notes</span>
+          <span>no notes</span>
         )}
       </NotesPanelSection>
     </NotesContainer>

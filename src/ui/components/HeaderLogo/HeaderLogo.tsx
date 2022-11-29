@@ -3,7 +3,7 @@ import { HeaderLogoDot, HeaderLogoText } from "./HeaderLogo.styles";
 const HeaderLogo = () => {
   return (
     <HeaderLogoText>
-      Tu<HeaderLogoDot>•</HeaderLogoDot>
+      tu<HeaderLogoDot>•</HeaderLogoDot>
       <strong>dum</strong>
     </HeaderLogoText>
   );
