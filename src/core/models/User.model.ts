@@ -3,6 +3,10 @@ export interface User {
   accessToken: string;
   email: string;
   name: string;
+  theme?: {
+    primary: string;
+    secondary: string;
+  };
   createdAt: Date;
   updatedAt: Date;
   username: string;
@@ -18,3 +22,5 @@ export interface NewUser {
     secondary: string;
   };
 }
+
+export type UpdateUser = Partial<NewUser>;

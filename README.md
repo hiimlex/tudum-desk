@@ -4,8 +4,8 @@ Tudum is a desktop application for managing your tasks. It is built with Electro
 
 ## TO-DO
 
-- [x] Login
-- [ ] Register
+- [X] Login
+- [X] Register
 - [X] Logout
 - [ ] Notification app system
 - [ ] User preferences

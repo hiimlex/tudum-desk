@@ -1,1 +1,3 @@
-window.Electron = require("electron");
+const { contextBridge, ipcMain, ipcRenderer } = require("electron");
+
+// window.Electron = require("electron");

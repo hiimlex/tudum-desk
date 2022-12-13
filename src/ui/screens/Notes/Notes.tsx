@@ -1,5 +1,8 @@
+import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../core";
+import { NotesService, RootState } from "../../../core";
+import { setNotes } from "../../../core/store/slicers";
 import { Note } from "../../components";
 import {
   NotesContainer,
@@ -12,6 +15,26 @@ import {
 
 const Notes = () => {
   const notes = useSelector((state: RootState) => state.notes.notes);
+  const dispatch = useDispatch();
+
+  const getNotes = useCallback(async () => {
+    try {
+      const { data } = await NotesService.getNotes();
+
+      if (data) {
+        dispatch(setNotes(data));
+      }
+    } catch (err: any) {
+      dispatch(setNotes([]));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    getNotes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <NotesContainer>

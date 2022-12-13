@@ -40,7 +40,7 @@ export const ShareButtonContainer = styled.div`
   height: 48px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.primary};
-  position: absolute;
+  position: fixed;
   bottom: 24px;
   right: 24px;
   box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.05);
@@ -66,7 +66,7 @@ export const ActionButtonContainer = styled.div<{
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  position: absolute;
+  position: fixed;
   bottom: ${({ bottom }) => bottom + "px"};
   right: ${({ right }) => right + "px"};
   background-color: ${({ theme, color }) => theme[color]};

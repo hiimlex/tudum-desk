@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../core";
+import { RootState, UserService } from "../../../core";
 import { setTheme } from "../../../core/store/slicers";
 import {
   ColorPicker,
@@ -22,6 +22,8 @@ const ThemeModal = () => {
   const { colors, primary, secondary } = useSelector(
     (state: RootState) => state.theme.theme
   );
+  const user = useSelector((state: RootState) => state.user.user);
+
   const dispatch = useDispatch();
 
   const handleColorPicker = (mode: ThemeColorMode) => {
@@ -29,11 +31,24 @@ const ThemeModal = () => {
     setShowColorPicker(true);
   };
 
-  const handleSelectColor = (color: string) => {
-    const colorObj: any = {};
-    colorObj[colorMode] = color;
-    dispatch(setTheme(colorObj));
-    setShowColorPicker(false);
+  const handleSelectColor = async (color: string) => {
+    try {
+      const colorObj: any = {};
+      colorObj[colorMode] = color;
+
+      if (user) {
+        const res = await UserService.updateUser({
+          theme: { ...user.theme, ...colorObj },
+        });
+
+        if (res) {
+          dispatch(setTheme(colorObj));
+          setShowColorPicker(false);
+        }
+      }
+    } catch (err: any) {
+      console.log(err);
+    }
   };
 
   return (

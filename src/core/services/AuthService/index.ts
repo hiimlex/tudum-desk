@@ -1,4 +1,4 @@
-import { Axios, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import api from "../../api";
 import { NewUser, User } from "../../models";
 import store from "../../store";
@@ -11,7 +11,11 @@ class AuthService {
     password: string
   ): Promise<AxiosResponse<{ token: string }>> {
     try {
-      const response = await api.post("/auth/login", {
+      const response = await api.post<
+        { token: string },
+        AxiosResponse<{ token: string }>,
+        { login: string; password: string }
+      >("/auth/login", {
         login,
         password,
       });
@@ -24,7 +28,7 @@ class AuthService {
 
   async getCurrentUser(): Promise<AxiosResponse<User>> {
     try {
-      const response = await api.get("/auth/currentUser");
+      const response = await api.get<User>("/auth/currentUser");
 
       return response;
     } catch (error) {
@@ -34,7 +38,10 @@ class AuthService {
 
   async register(user: NewUser): Promise<AxiosResponse<null>> {
     try {
-      const response = await api.post("/auth/register", user);
+      const response = await api.post<User, AxiosResponse<null>, NewUser>(
+        "/auth/register",
+        user
+      );
 
       return response;
     } catch (error) {

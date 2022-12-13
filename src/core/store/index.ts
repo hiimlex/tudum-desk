@@ -1,10 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import {
+  modalReducer,
   notesReducer,
   themeReducer,
   userReducer,
-  modalReducer,
 } from "./slicers";
 
 export interface GenericAction<T = any> {

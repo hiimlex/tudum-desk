@@ -1,4 +1,4 @@
-import { ColorsType } from "../../../core/store/slicers";
+import { favoriteById } from "../../../core/store/slicers";
 import {
   NoteAction,
   NoteContainer,
@@ -8,7 +8,7 @@ import {
 } from "./Note.styles";
 
 import { MdDelete, MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NotesService, RootState } from "../../../core";
 
 interface NoteProps {
@@ -17,7 +17,7 @@ interface NoteProps {
   content: string;
   createdAt?: string;
   updatedAt?: string;
-  color: ColorsType;
+  color: string;
   favorite?: boolean;
   width?: React.CSSProperties["width"];
 }
@@ -31,14 +31,21 @@ const Note = ({
   color,
 }: NoteProps) => {
   const theme = useSelector((state: RootState) => state.theme.theme);
+  const dispatch = useDispatch();
 
-  const handleFavorite = () => {
-    NotesService.favoriteById(id);
+  const handleFavorite = async () => {
+    try {
+      const res = await NotesService.favoriteById(id);
+
+      if (res.status === 204) {
+        dispatch(favoriteById(id));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleDelete = () => {
-    NotesService.removeNoteById(id);
-  };
+  const handleDelete = () => {};
 
   return (
     <NoteContainer className="tudum-note" color={color}>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HeaderLogo } from "../../components";
 import {
   LoginButton,
@@ -13,28 +12,25 @@ import {
   LoginSubtitle,
 } from "./Login.styles";
 
-import { AxiosError } from "axios";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AuthService } from "../../../core";
-import { setUser } from "../../../core/store/slicers";
+import { setTheme, setUser } from "../../../core/store/slicers";
 import { AppBar } from "../../components/AppBar";
 
 const Login = () => {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLoginOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-  };
+  const handleLogin = async (data: any) => {
+    const { login, password } = data;
 
-  const handlePasswordOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleLogin = async () => {
     if (login && password) {
       try {
         const { data } = await AuthService.login(login, password);
@@ -48,12 +44,18 @@ const Login = () => {
 
           dispatch(setUser(user));
 
+          if (user.theme) {
+            dispatch(
+              setTheme({
+                primary: user.theme.primary,
+                secondary: user.theme.secondary,
+              })
+            );
+          }
+
           navigate("/");
         }
-      } catch (err) {
-        if (err instanceof AxiosError) {
-        }
-      }
+      } catch (err) {}
     }
   };
 
@@ -77,20 +79,24 @@ const Login = () => {
         <LoginHeader>
           <LoginSubtitle>insert your credentials to sign up</LoginSubtitle>
         </LoginHeader>
-        <LoginForm>
+        <LoginForm onSubmit={handleSubmit(handleLogin)}>
           <LoginInput
-            onChange={handleLoginOnChange}
             type="text"
             autoComplete="off"
             placeholder="login"
+            {...register("login", { required: true })}
           />
           <LoginInput
-            onChange={handlePasswordOnChange}
             type="password"
             autoComplete="off"
             placeholder="password"
+            {...register("password", { required: true })}
           />
-          <LoginButton type="button" onClick={handleLogin}>
+          <LoginButton
+            type="submit"
+            disabled={!isValid}
+            className={!isValid ? "disabled" : ""}
+          >
             Login
           </LoginButton>
         </LoginForm>

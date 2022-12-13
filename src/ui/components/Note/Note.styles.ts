@@ -1,10 +1,9 @@
 import styled, { DefaultTheme } from "styled-components";
-import { ColorsType } from "../../../core/store/slicers";
 
-export const NoteContainer = styled.div<{ color: ColorsType }>`
+export const NoteContainer = styled.div<{ color: string }>`
   display: flex;
   flex-direction: column;
-  background: ${({ theme, color }) => theme.colors[color] + "66"};
+  background: ${({ theme, color }) => color + "66"};
   padding: 12px;
   border-radius: 12px;
   color: ${({ theme }) => theme.text};
