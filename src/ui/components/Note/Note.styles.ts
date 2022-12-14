@@ -3,11 +3,12 @@ import styled, { DefaultTheme } from "styled-components";
 export const NoteContainer = styled.div<{ color: string }>`
   display: flex;
   flex-direction: column;
-  background: ${({ theme, color }) => color + "66"};
+  background: ${({ color }) => color + "66"};
   padding: 12px;
   border-radius: 12px;
   color: ${({ theme }) => theme.text};
   flex: 0.3;
+  min-width: 180px;
 
   @media (max-width: 768px) {
     width: 100% !important;
@@ -24,6 +25,8 @@ export const NoteContent = styled.div`
   font-weight: 400;
   text-align: justify;
   margin: 2px 0;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 
 export const NoteFooter = styled.div`

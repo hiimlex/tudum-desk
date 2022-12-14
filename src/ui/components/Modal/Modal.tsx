@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { useModal } from "../../../core";
 
-export interface ModalProps {
+export interface IModalProps {
   id: string;
   title: string;
   children: React.ReactNode;
@@ -30,7 +30,7 @@ const Modal = ({
   width = 460,
   shouldDestroyOnClose,
   zIndex,
-}: ModalProps) => {
+}: IModalProps) => {
   const modalService = useModal();
 
   useEffect(() => {

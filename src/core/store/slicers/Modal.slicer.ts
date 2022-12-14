@@ -4,10 +4,10 @@ import {
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 import { GenericAction } from "..";
-import { ModalProps } from "../../../ui";
+import { IModalProps } from "../../../ui";
 
 interface ModalReducerState {
-  modals: ModalProps[];
+  modals: IModalProps[];
   zIndex: number;
 }
 
@@ -21,7 +21,7 @@ const modalSlice = createSlice<
     zIndex: 0,
   },
   reducers: {
-    createModal: (state, action: GenericAction<ModalProps>) => {
+    createModal: (state, action: GenericAction<IModalProps>) => {
       const hasModal = state.modals.find((el) => el.id === action.payload.id);
 
       if (hasModal) {
@@ -64,7 +64,7 @@ const modalSlice = createSlice<
   },
 });
 
-const createModal: ActionCreatorWithPayload<ModalProps> = modalSlice.actions
+const createModal: ActionCreatorWithPayload<IModalProps> = modalSlice.actions
   .createModal as any;
 
 const destroyModalById: ActionCreatorWithPayload<string> = modalSlice.actions

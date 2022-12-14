@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState, UserService } from "../../../core";
+import { AuthService, RootState } from "../../../core";
 import { setTheme } from "../../../core/store/slicers";
 import {
   ColorPicker,
@@ -37,7 +37,7 @@ const ThemeModal = () => {
       colorObj[colorMode] = color;
 
       if (user) {
-        const res = await UserService.updateUser({
+        const res = await AuthService.updateUser({
           theme: { ...user.theme, ...colorObj },
         });
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AuthService, NewUser, RootState } from "../../../core";
+import { AuthService, INewUser, RootState } from "../../../core";
 import { setTheme } from "../../../core/store/slicers";
 import { AppBar, HeaderLogo } from "../../components";
 import {
@@ -67,7 +67,7 @@ const Register = () => {
 
   const handleRegister = async (data: any) => {
     try {
-      const user: NewUser = {
+      const user: INewUser = {
         name: data.name,
         username: data.username,
         email: data.email,

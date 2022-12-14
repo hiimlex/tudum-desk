@@ -1,4 +1,3 @@
-import { favoriteById } from "../../../core/store/slicers";
 import {
   NoteAction,
   NoteContainer,
@@ -7,9 +6,10 @@ import {
   NoteTitle,
 } from "./Note.styles";
 
-import { MdDelete, MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import { MdOutlineDelete, MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { NotesService, RootState } from "../../../core";
+import { AppDispatch, NotesService, RootState } from "../../../core";
+import { fetchNotes } from "../../../core/store/slicers";
 
 interface NoteProps {
   id: string;
@@ -31,24 +31,34 @@ const Note = ({
   color,
 }: NoteProps) => {
   const theme = useSelector((state: RootState) => state.theme.theme);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleFavorite = async () => {
     try {
       const res = await NotesService.favoriteById(id);
 
       if (res.status === 204) {
-        dispatch(favoriteById(id));
+        dispatch(fetchNotes());
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    try {
+      const res = await NotesService.removeNoteById(id);
+
+      if (res.status === 204) {
+        dispatch(fetchNotes());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <NoteContainer className="tudum-note" color={color}>
+    <NoteContainer className="tudum-note" color={color} style={{ width }}>
       <NoteTitle>{title}</NoteTitle>
       <NoteContent>{content}</NoteContent>
       <NoteFooter>
@@ -63,7 +73,7 @@ const Note = ({
           )}
         </NoteAction>
         <NoteAction role="button" onClick={handleDelete}>
-          <MdDelete size={18} color={theme.colors.gray}></MdDelete>
+          <MdOutlineDelete size={18} color={theme.colors.gray}></MdOutlineDelete>
         </NoteAction>
       </NoteFooter>
     </NoteContainer>

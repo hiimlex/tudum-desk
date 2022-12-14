@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   _id: string;
   accessToken: string;
   email: string;
@@ -12,7 +12,7 @@ export interface User {
   username: string;
 }
 
-export interface NewUser {
+export interface INewUser {
   name: string;
   email: string;
   username: string;
@@ -23,4 +23,4 @@ export interface NewUser {
   };
 }
 
-export type UpdateUser = Partial<NewUser>;
+export type IUpdateUser = Partial<INewUser>;

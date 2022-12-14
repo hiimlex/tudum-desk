@@ -1,43 +1,45 @@
 import {
-  ActionCreatorWithPayload,
+  createAsyncThunk,
   createSlice,
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
-import { GenericAction } from "..";
-import { Note } from "../../models";
+import { NotesService } from "../../";
+import { INote } from "../../models";
 
-interface NotesReducerState {
-  notes: Note[];
+interface INotesReducerState {
+  notes: INote[];
 }
 
+const initialState: INotesReducerState = {
+  notes: [],
+};
+
+const fetchNotes = createAsyncThunk<INote[], undefined>(
+  "notes/fetchNotes",
+  async (_data, thunkApi) => {
+    try {
+      const response = await NotesService.getNotes();
+      return response.data;
+    } catch (error) {
+      throw thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const notesSlice = createSlice<
-  NotesReducerState,
-  SliceCaseReducers<NotesReducerState>
+  INotesReducerState,
+  SliceCaseReducers<INotesReducerState>
 >({
   name: "notes",
-  initialState: {
-    notes: [],
-  },
-  reducers: {
-    setNotes: (state, action: GenericAction<Note[]>) => {
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(fetchNotes.fulfilled, (state, action) => {
       state.notes = action.payload;
-    },
-    favoriteById: (state, action: GenericAction<string>) => {
-      const note = state.notes.find((note) => note._id === action.payload);
-
-      if (note) {
-        note.favorite = !note.favorite;
-      }
-    },
+    });
   },
 });
 
-const setNotes: ActionCreatorWithPayload<Note[]> = notesSlice.actions
-  .setNotes as any;
-
-const favoriteById: ActionCreatorWithPayload<string> = notesSlice.actions
-  .favoriteById as any;
-
 const notesReducer = notesSlice.reducer;
 
-export { notesReducer, setNotes, favoriteById };
+export { notesReducer, fetchNotes };

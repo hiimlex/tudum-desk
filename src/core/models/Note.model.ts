@@ -1,10 +1,8 @@
-import { ColorsType } from "../store/slicers";
-
-export interface Note {
+export interface INote {
   _id: string;
   title: string;
   content: string;
-  color: ColorsType;
+  color: string;
   favorite: boolean;
   owner: {
     _id: string;
@@ -12,4 +10,10 @@ export interface Note {
   };
   createdAt: string;
   updatedAt?: string;
+}
+
+export interface INewNote {
+  title: string;
+  content: string;
+  color: string;
 }

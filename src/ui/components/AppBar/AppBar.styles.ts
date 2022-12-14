@@ -5,7 +5,7 @@ export const AppMenu = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  position: absolute;
+  position: fixed;
   z-index: 99;
   top: 0;
   right: 0;

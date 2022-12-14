@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from "../../api";
-import { NewUser, User } from "../../models";
+import { INewUser, IUpdateUser, IUser } from "../../models";
 import store from "../../store";
 import { setUser } from "../../store/slicers";
 import { errorToAxiosError } from "../../utils";
@@ -26,9 +26,9 @@ class AuthService {
     }
   }
 
-  async getCurrentUser(): Promise<AxiosResponse<User>> {
+  async getCurrentUser(): Promise<AxiosResponse<IUser>> {
     try {
-      const response = await api.get<User>("/auth/currentUser");
+      const response = await api.get<IUser>("/auth/currentUser");
 
       return response;
     } catch (error) {
@@ -36,10 +36,23 @@ class AuthService {
     }
   }
 
-  async register(user: NewUser): Promise<AxiosResponse<null>> {
+  async register(user: INewUser): Promise<AxiosResponse<null>> {
     try {
-      const response = await api.post<User, AxiosResponse<null>, NewUser>(
+      const response = await api.post<IUser, AxiosResponse<null>, INewUser>(
         "/auth/register",
+        user
+      );
+
+      return response;
+    } catch (error) {
+      throw errorToAxiosError(error);
+    }
+  }
+
+  async updateUser(user: IUpdateUser): Promise<AxiosResponse<null>> {
+    try {
+      const response = await api.put<null, AxiosResponse<null>, IUpdateUser>(
+        "/users",
         user
       );
 

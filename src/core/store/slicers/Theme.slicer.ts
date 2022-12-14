@@ -33,9 +33,9 @@ export const colors: Record<ColorsType, string> = {
   black: "#3a3b3c",
 };
 
-export type ThemeProps = DefaultTheme;
+export type TThemeProps = DefaultTheme;
 
-export const defaultTheme: ThemeProps = {
+export const defaultTheme: TThemeProps = {
   background: "#ffffff",
   backgroundContrast: "#efefef",
   text: "#4a4b4c",
@@ -46,7 +46,7 @@ export const defaultTheme: ThemeProps = {
 };
 
 interface ThemeState {
-  theme: ThemeProps;
+  theme: TThemeProps;
 }
 
 const themeSlice = createSlice<ThemeState, SliceCaseReducers<ThemeState>>({

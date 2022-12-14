@@ -12,6 +12,8 @@ export const HeaderContainer = styled.header`
   position: relative;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
+  position: fixed;
+  top: 0;
 `;
 
 export const HeaderNav = styled.nav`

@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 export const ModalWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 999;
   width: 100vw;
   height: 100vh;
   top: 0;
   background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  overflow-y: auto;
+  inset: 0;
 
   display: flex;
   justify-content: center;
@@ -20,6 +23,7 @@ export const ModalContainer = styled.div`
   position: relative;
   height: fit-content;
   margin-top: 124px;
+  margin-bottom: 32px;
 `;
 
 export const ModalHeader = styled.div`

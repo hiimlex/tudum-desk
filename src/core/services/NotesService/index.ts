@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
 import api from "../../api";
-import { Note } from "../../models";
+import { INewNote, INote } from "../../models";
 import {} from "../../store/slicers";
 import { errorToAxiosError } from "../../utils";
 
 class NotesService {
-  async getNotes(): Promise<AxiosResponse<Note[]>> {
+  async getNotes(): Promise<AxiosResponse<INote[]>> {
     try {
       const response = await api.get("/notes");
 
@@ -25,11 +25,27 @@ class NotesService {
     }
   }
 
-  addNote(note: Note): void {}
+  async addNote(note: INewNote): Promise<AxiosResponse<null>> {
+    try {
+      const response = await api.post("/notes", note);
 
-  removeNoteById(id: string): void {}
+      return response;
+    } catch (error) {
+      throw errorToAxiosError(error);
+    }
+  }
 
-  editNoteById(id: string, note: Note): void {}
+  async removeNoteById(id: string): Promise<AxiosResponse<null>> {
+    try {
+      const response = await api.delete(`/notes/${id}`);
+
+      return response;
+    } catch (error) {
+      throw errorToAxiosError(error);
+    }
+  }
+
+  editNoteById(id: string, note: INote): void {}
 }
 
 export default new NotesService();

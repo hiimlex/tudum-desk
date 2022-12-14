@@ -28,10 +28,10 @@ const Header = () => {
     navigate("/login");
   };
 
-  const modalService = useModal();
+  const { create: createModal } = useModal();
 
   const handleCreateThemeModal = () => {
-    modalService.create({
+    createModal({
       children: <ThemeModal />,
       id: "theme-modal",
       title: "theme settings",
@@ -39,7 +39,6 @@ const Header = () => {
       shouldDestroyOnClose: true,
       show: true,
       width: "45%",
-      zIndex: 1,
     });
   };
 

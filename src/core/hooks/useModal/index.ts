@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { ModalProps } from "../../../ui";
+import { IModalProps } from "../../../ui";
 import { RootState } from "../../store";
 import {
   createModal,
@@ -13,7 +13,7 @@ const useModal = () => {
   const dispatch = useDispatch();
   const modals = useSelector((state: RootState) => state.modal.modals);
 
-  const all = (): ModalProps[] => {
+  const all = (): IModalProps[] => {
     return modals;
   };
 
@@ -21,7 +21,7 @@ const useModal = () => {
     return modals.some((modal) => modal.id === id);
   };
 
-  const create = (modal: ModalProps): ModalProps => {
+  const create = (modal: IModalProps): IModalProps => {
     dispatch(createModal(modal));
 
     return modal;

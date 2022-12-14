@@ -8,6 +8,7 @@ export const ProfileContainer = styled.div`
   flex-direction: column;
   padding: 24px;
   color: ${({ theme }) => theme.text};
+  margin-top: 82px;
 `;
 
 export const ProfileCard = styled.div`

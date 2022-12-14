@@ -8,6 +8,7 @@ export const NotesContainer = styled.div`
   flex-direction: column;
   padding: 24px;
   color: ${({ theme }) => theme.text};
+  margin-top: 82px;
 `;
 
 export const NotesTitle = styled.h2`
@@ -38,6 +39,7 @@ export const NotesPanelSection = styled.div`
 
   margin: 12px 0;
 `;
+
 export const NotesPanelTitle = styled.span`
   font-size: 18px;
   font-weight: 500;
@@ -47,7 +49,7 @@ export const NotesPanelContent = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   margin-top: 12px;
